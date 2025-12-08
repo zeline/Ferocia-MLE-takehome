@@ -8,6 +8,11 @@ This project implements a complete ML pipeline including:
 - **Model training** with evaluation metrics
 - **REST API** for serving predictions
 
+  <img width="1084" height="545" alt="Screenshot 2025-12-08 at 11 14 31 pm" src="https://github.com/user-attachments/assets/d2b75a4f-efe2-4f55-bf97-8bfd00f37c3f" />
+<img width="1054" height="536" alt="Screenshot 2025-12-08 at 11 14 41 pm" src="https://github.com/user-attachments/assets/12464dc2-242a-483d-903e-6add961540a8" />
+<img width="1057" height="594" alt="Screenshot 2025-12-08 at 11 14 58 pm" src="https://github.com/user-attachments/assets/d591dc96-b16a-4dd1-9532-a1cfe8e7dd36" />
+
+
 ### Problem Type
 Binary classification with imbalanced classes (~88% No, ~12% Yes)
 
