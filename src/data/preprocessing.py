@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
+from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
@@ -29,8 +30,10 @@ def load_data(filepath: str) -> pd.DataFrame:
     Returns:
         DataFrame with the loaded data
     """
-    # missing_values = ["unknown"]
-    df = pd.read_csv(filepath, sep=';')
+    #categorical missing values will be ignores
+    #they make a minority unlike in poutcome
+    missing_values = ["unknown"]
+    df = pd.read_csv(filepath, sep=';', na_values = missing_values)
     return df
 
 # ---- data transformations ----
@@ -79,16 +82,41 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 #column transformers
 def create_preprocessor() -> ColumnTransformer:
     """
-    create a preprocessing pipeline for the mixed data """
+    Create a preprocessing pipeline for the mixed data.
+    
+    Includes imputation for handling missing values created by treating 'unknown' as NaN.
+    """
+    
+    # Numeric: impute with median (robust to outliers), then scale
+    numeric_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='median')),
+        ('scaler', StandardScaler())
+    ])
+    
+    # Categorical: impute with 'missing' category, then one-hot encode
+    categorical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+        ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
+    ])
+    
+    # Ordinal: impute with most frequent, then encode
+    ordinal_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('encoder', OrdinalEncoder())
+    ])
+    
+    # Binary: impute with most frequent, then encode
+    binary_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('encoder', OrdinalEncoder())
+    ])
 
     preprocessor = ColumnTransformer(
         transformers=[
-            #could get more specific to cater to each category better
-            #eg, balance has outliers so RobustScaler() might b better
-            ('num', StandardScaler(), NUMERIC_FEATURES),
-            ('cat', OneHotEncoder(handle_unknown='ignore', sparse_output=False), CATEGORICAL_FEATURES),
-            ('ord', OrdinalEncoder(), ORDINAL_FEATURES),
-            ('bin', OrdinalEncoder(), BINARY_FEATURES),
+            ('num', numeric_transformer, NUMERIC_FEATURES),
+            ('cat', categorical_transformer, CATEGORICAL_FEATURES),
+            ('ord', ordinal_transformer, ORDINAL_FEATURES),
+            ('bin', binary_transformer, BINARY_FEATURES),
         ])
     return preprocessor
 
