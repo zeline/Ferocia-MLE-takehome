@@ -1,14 +1,14 @@
 # Ferocia MLE Take-home: Term Deposit Prediction
 
-An end-to-end machine learning pipeline to predict whether a customer will subscribe to a term deposit based on bank marketing campaign data.
+An E2E machine learning pipeline that predicts whether a customer will subscribe to a term deposit based on banking data.
 
 ## 📊 Project Overview
 
-This project implements a complete ML pipeline including:
-- **Data Preprocessing**: Handling missing values, feature engineering, encoding categorical variables
-- **Model Training**: Logistic Regression with class balancing for imbalanced data
-- **API Serving**: FastAPI application with a user-friendly web interface
-- **Testing**: Unit tests for preprocessing pipeline validation
+This project implements a Logistic Regression Model (or Random Forest) for its ML prediction and features the following:
+- **Data Preprocessing**: Data analysis, handling missing values, feature engineering, encoding categorical variables
+- **Model Training**: Logistic Regression with class balancing for imbalanced data with multiple different dtypes
+- **API Serving**: FastAPI application with a customised user-friendly interface
+- **Testing**: Unit tests for preprocessing pipeline validation (a few examples)
 
 ## 🎯 Key Findings
 
@@ -21,6 +21,8 @@ This project implements a complete ML pipeline including:
 | F1 Score | ~0.44 |
 | ROC AUC | ~0.82 |
 
+I wanted to prioritise high Recall over Precision as minimising false negatives is more important in this scenario.
+
 ### Data Insights
 - **Class Imbalance**: The dataset is heavily imbalanced (~88% "No" vs ~12% "Yes")
 - **Missing Values**: `unknown` values in categorical features handled as NaN with imputation
@@ -30,7 +32,7 @@ This project implements a complete ML pipeline including:
 1. Try ensemble models (Random Forest, XGBoost, LightGBM)
 2. Feature selection to reduce dimensionality
 3. Cross-validation for more robust evaluation
-4. Deeper analysis into feature relationships
+4. Deeper analysis into feature relationships 
 5. Consider removing `duration` feature (potential data leakage - unknown before call)
 
 ---
@@ -160,10 +162,10 @@ This project was developed with assistance from **Claude (Anthropic)** via **Cur
 
 ### How AI Assisted
 - **Project scaffolding**: Setting up initial file structure and boilerplate code
-- **Function generation**: Creating preprocessing functions, API schemas, and test cases
+- **Function generation**: Created functions on demand that created high ROI or were out of scope (like transcribing data-dictionary.txt and creating the UI html code
 - **Debugging**: Identifying and fixing issues with virtual environment, FastAPI routes, and imports
 - **Code review**: Reviewing preprocessing and training pipelines for best practices
-- **Documentation**: Generating docstrings and README content
+- **Documentation**: Generating docstrings and README content templates 
 
 ### AI Transcripts
 Full conversation logs are available in the `AI_TRANSCRIPTS/` directory for transparency and reproducibility.
