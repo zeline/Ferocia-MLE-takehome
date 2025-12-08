@@ -1,4 +1,4 @@
-
+#library imports
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
@@ -30,7 +30,7 @@ def load_data(filepath: str) -> pd.DataFrame:
     Returns:
         DataFrame with the loaded data
     """
-    #categorical missing values will be ignores
+    #categorical missing values could be ignores
     #they make a minority unlike in poutcome
     missing_values = ["unknown"]
     df = pd.read_csv(filepath, sep=';', na_values = missing_values)
@@ -40,6 +40,8 @@ def load_data(filepath: str) -> pd.DataFrame:
 def campaign_features(df: pd.DataFrame) -> pd.DataFrame:
     """Add new campaign feature from pdays."""
     df = df.copy()
+
+    #should add assertion to check for 'first campaign' feature
     # New binary feature: is this the first campaign for this client?
     df['first_campaign'] = (df['pdays'] == -1).astype(int)
     # Replace -1 with 0 for pdays (will be scaled anyway)
@@ -74,7 +76,7 @@ def encode_target(y: pd.Series) -> np.ndarray:
 
 def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
-    # add in what else i'd do
+    # any other cleaning or transformations would go here
     # campaign feature transformation
     df = campaign_features(df)
     return df
