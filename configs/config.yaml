@@ -1,0 +1,64 @@
+# Configuration for Term Deposit Prediction Pipeline
+
+# Data paths
+data:
+  raw_data_path: "DATA/dataset.csv"
+  processed_data_path: "DATA/processed/"
+  separator: ";"
+
+# Feature configuration
+features:
+  target_column: "y"
+  numeric_features:
+    - age
+    - balance
+    - day
+    - duration
+    - campaign
+    - pdays
+    - previous
+  categorical_features:
+    - job
+    - marital
+    - education
+    - default
+    - housing
+    - loan
+    - contact
+    - month
+    - poutcome
+
+# Model configuration
+model:
+  type: "xgboost"  # Options: logistic_regression, random_forest, xgboost, lightgbm
+  test_size: 0.2
+  random_state: 42
+  
+  # Hyperparameters (example for XGBoost)
+  hyperparameters:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+
+# Training configuration
+training:
+  cross_validation_folds: 5
+  early_stopping_rounds: 10
+  
+# MLflow configuration
+mlflow:
+  tracking_uri: "mlruns"
+  experiment_name: "term_deposit_prediction"
+
+# API configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+# Artifacts
+artifacts:
+  model_path: "models/"
+  preprocessor_path: "models/preprocessor.joblib"
+
