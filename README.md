@@ -1,13 +1,20 @@
 # Ferocia MLE Take-home: Term Deposit Prediction
 
-An E2E machine learning pipeline that predicts whether a customer will subscribe to a term deposit based on banking data.
+A production-ready ML service that predicts whether a customer will subscribe to a term deposit based on their profile and marketing campaign data.
 
-## 📊 Project Overview
+## Project Overview
+This project implements a complete ML pipeline including:
+- **Data preprocessing** with feature engineering
+- **Model training** with evaluation metrics
+- **REST API** for serving predictions
+
+### Problem Type
+Binary classification with imbalanced classes (~88% No, ~12% Yes)
 
 This project implements a Logistic Regression Model (or Random Forest) for its ML prediction and features the following:
 - **Data Preprocessing**: Data analysis, handling missing values, feature engineering, encoding categorical variables
-- **Model Training**: Logistic Regression with class balancing for imbalanced data with multiple different dtypes
-- **API Serving**: FastAPI application with a customised user-friendly interface
+- **Model Training**: Logistic Regression as it deals well with class balancing, different dtypes, and it's simple and robut (appropriate for this task)
+- **API Serving**: FastAPI application with a customised user-friendly interface. (To give a more realistic customer/business experience)
 - **Testing**: Unit tests for preprocessing pipeline validation (a few examples)
 
 ## 🎯 Key Findings
@@ -21,7 +28,7 @@ This project implements a Logistic Regression Model (or Random Forest) for its M
 | F1 Score | ~0.44 |
 | ROC AUC | ~0.82 |
 
-I wanted to prioritise high Recall over Precision as minimising false negatives is more important in this scenario.
+I wanted to prioritise high Recall over Precision as minimising false negatives is more important in this scenario & the class imbalance is already impacting the Precision quality
 
 ### Data Insights
 - **Class Imbalance**: The dataset is heavily imbalanced (~88% "No" vs ~12% "Yes")
@@ -66,6 +73,17 @@ Ferocia-MLE-takehome/
 ```
 
 ---
+### Technical Stack
+| Category | Tools |
+|----------|-------|
+| **Language** | Python 3.13 |
+| **ML Framework** | scikit-learn |
+| **API Framework** | FastAPI |
+| **Data Processing** | pandas, numpy |
+| **Model Serialization** | joblib |
+| **Testing** | pytest |
+| **Server** | uvicorn |
+---
 
 ## 🚀 Setup Instructions
 
@@ -78,7 +96,7 @@ git clone https://github.com/yourusername/Ferocia-MLE-takehome.git
 cd Ferocia-MLE-takehome
 ```
 
-### 2. Create Virtual Environment
+### 2. Create Virtual Environment 
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -153,8 +171,6 @@ curl -X POST "http://localhost:8000/predict" \
     "poutcome": "unknown"
   }'
 ```
-
----
 
 ## 🤖 AI Tools Used
 
