@@ -1,5 +1,5 @@
 # Term deposit prediction ML pipeline setup
-_Exported on 10/12/2025 at 15:37:37 GMT+11 from Cursor (2.1.50)_
+_Exported on 10/12/2025 at 16:35:38 GMT+11 from Cursor (2.1.50)_
 
 ---
 
@@ -4858,4 +4858,49 @@ Open **http://localhost:8000** in your browser to see your Ferocia Term Deposit 
 
 To stop the server, press `Ctrl+C` in the terminal where it's running.
 
+---
+
+**User**
+
+something is wrong frontend
+
+---
+
+**Cursor**
+
+Let me check the server status and the frontend file:
+
+The server is running fine and responding with 200 OK. Let me check the index.html file to see what might be causing the issue:
+
+The server logs show everything is responding with 200 OK (including `/`, `/health`, and `/predict`). The `index.html` looks correct.
+
+Can you describe what you're seeing? Possible issues:
+
+1. **Blank page?** - Try hard refresh (Cmd+Shift+R)
+2. **Form not submitting?** - Check browser console (F12 > Console)
+3. **Error message?** - What does it say?
+4. **Styling broken?** - The Google Fonts might not be loading
+
+What's the specific problem you're experiencing?
+
+---
+
+**User**
+
+run it again
+
+---
+
+**Cursor**
+
+The server was shut down. Let me restart it:
+
+Server is running! ✅
+
+**Open in your browser:** http://localhost:8000
+
+The API is live with:
+- Model and preprocessor loaded from `artifacts/`
+- Web interface at `/`
+- Health check responding at `/health`
 
